@@ -4,13 +4,13 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCAlEUW3KxQbXHVWEZ_W57d4OqgYS6KCJw",
-    authDomain: "class-scheduler-82c49.firebaseapp.com",
-    projectId: "class-scheduler-82c49",
-    storageBucket: "class-scheduler-82c49.firebasestorage.app",
-    messagingSenderId: "356761532861",
-    appId: "1:356761532861:web:db98eab6106d2d5b5ffad4",
-    measurementId: "G-XN40PXGKPW"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
