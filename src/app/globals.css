@@ -5,22 +5,48 @@
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* デフォルト（ライトテーマ）の値 */
+  --background: #ffffff;
+  --foreground: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.fc {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .fc-view-harness, .fc-scrollgrid {
+    width: 100% !important;
+  }
+  
+  /* FullCalendarのボタンを小さく */
+.fc .fc-button {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  
+  /* イベント表示のテキストサイズを調整 */
+  .fc-event {
+    font-size: 0.7rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  

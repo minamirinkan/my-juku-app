@@ -1,0 +1,38 @@
+/* src/components/toastStyles.css */
+
+.custom-toast {
+    width: 500px !important;
+    margin: 0 auto;
+    border-radius: 12px !important;
+    background-color: #ff4d4f !important;
+    /* 鮮やかな赤 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.custom-toast-body {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    padding: 1.2rem 1.5rem;
+}
+
+/* 中央に固定配置 */
+.custom-toast-container {
+    top: 50% !important;
+    transform: translateY(-50%);
+}
+
+.custom-toast-container .Toastify__toast {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.custom-toast-container .Toastify__toast--error {
+    background-color: #d32f2f !important;
+    /* より深い赤 */
+    color: #fff !important;
+}
