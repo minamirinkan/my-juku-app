@@ -11,7 +11,7 @@ import {
     saveScheduleDoc,
     saveMakeupLesson,
     buildDailyDocId,
-} from '@/app/superadmin/dashboard/Students/firebase/attendanceFirestore';
+} from '@/app/superadmin/dashboard/students/firebase/attendanceFirestore';
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 
 type AttendanceEntry = {
