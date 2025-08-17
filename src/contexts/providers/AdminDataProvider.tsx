@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useMemo } from "react";
 import { useAuth } from "../AuthContext";
-import { useStudents } from "../hooks/useStudents";
-import { useCustomers } from "../hooks/useCustomers";
-import { usePeriodLabelsByClassroomCode } from "../hooks/usePeriodLabelsBySchool";
-import { useSchoolClosures } from "../hooks/useSchoolClosures";
-import { useDailySchedules } from "../hooks/useDailySchedules";
-import { useClassroom } from "../hooks/useClassroom";
+import { useStudents } from "@/hooks/useStudents";
+import { useCustomers } from "@/hooks/useCustomers";
+import { usePeriodLabelsByClassroomCode } from "@/hooks/usePeriodLabelsBySchool";
+import { useSchoolClosures } from "@/hooks/useSchoolClosures";
+import { useDailySchedules } from "@/hooks/useDailySchedules";
+import { useClassroom } from "@/hooks/useClassroom";
 
 const AdminDataContext = createContext<any>(null);
 

@@ -4,7 +4,7 @@ import { SuperAdminDataProvider } from "./SuperAdminDataProvider";
 import { AdminDataProvider } from "./AdminDataProvider";
 import { TeacherDataProvider } from "./TeacherDataProvider";
 import { CustomerDataProvider } from "./CustomerDataProvider";
-import { ClassroomSelectionProvider } from "../ClassroomSelectionContext";
+import { ClassroomSelectionProvider } from "@/app/superadmin/ClassroomSelectionContext";
 
 const RoleBasedProvider = ({ children }: { children: React.ReactNode }) => {
     const { userData } = useAuth();
