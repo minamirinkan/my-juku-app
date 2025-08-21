@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useMemo, ReactNode } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useStudents } from "@/hooks/useStudents";
 import { useCustomers } from "@/hooks/useCustomers";
 import { usePeriodLabelsByClassroomCode } from "@/hooks/usePeriodLabelsBySchool";
@@ -50,10 +50,10 @@ export const AdminDataProvider = ({ children }: AdminDataProviderProps) => {
                 customers,
                 periodLabels,
                 closures: {
-                closures,
-                deletedClosures,
-                updatedAt: updatedAt ? updatedAt.toDate() : undefined,
-            },
+                    closures,
+                    deletedClosures,
+                    updatedAt: updatedAt ? updatedAt.toDate() : undefined,
+                },
                 dailySchedules: filteredSchedules,
             }}
         >

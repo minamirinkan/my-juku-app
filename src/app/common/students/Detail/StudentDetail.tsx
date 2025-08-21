@@ -1,11 +1,13 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import StudentInfoSection from './StudentInfoSection';
 import GuardianInfoSection from './GuardianInfoSection';
 import ActionButtons from '@/utils/ActionButtons';
 import StudentAttendanceTab from './Tabs/StudentAttendanceTab'
 import StudentCourseTable from './Tabs/StudentCourseTable';
-import { Student } from '@/types/student';
-import { Customer } from '@/types/customer';
+import { Student } from '@/types/types';
+import { Customer } from '@/types/types';
 
 type StudentDetailProps = {
     student: Student;
@@ -16,7 +18,7 @@ type StudentDetailProps = {
 
 const TABS = ['基本情報', '在籍情報', '受講情報', '授業情報', '請求情報'];
 
-const StudentDetail: React.FC<StudentDetailProps> = ({ student, customer, classroomCode, onBack }) => {
+const StudentDetail: React.FC<StudentDetailProps> = ({ student, onBack }) => {
     console.log("✅ StudentDetail 受け取った student:", student);
     const [activeTab, setActiveTab] = useState('基本情報');
     const [isEditing, setIsEditing] = useState(false);

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Admin } from "../types/admin";
+import { Admin } from "@/types/types";
 import { useAuth } from "@/contexts/AuthContext"; // classroomCode と role を取得
 
 export function useAdmins() {
-  const { user, role, loading: authLoading } = useAuth();
+  const { role, loading: authLoading, userData } = useAuth();
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
-  const classroomCode = user?.classroomCode;
+  const classroomCode = userData?.classroomCode;
 
   useEffect(() => {
     const fetchAdmins = async () => {

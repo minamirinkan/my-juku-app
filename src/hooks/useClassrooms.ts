@@ -1,7 +1,9 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import { collection, getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { Classroom } from '@/types/classroom';
+import { Classroom } from '@/types/types';
 import { useAuth } from '@/contexts/AuthContext';
 
 export function useClassrooms() {
@@ -22,30 +24,13 @@ export function useClassrooms() {
         const list = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
-            code: data.code,
+            uid: data.uid,
             name: data.name,
             email: data.email,
-            phoneNumber: data.phoneNumber,
-            faxNumber: data.faxNumber,
-            addressInfo: {
-              postalCode: data.addressInfo?.postalCode || '',
-              prefecture: data.addressInfo?.prefecture || '',
-              city: data.addressInfo?.city || '',
-              cityKana: data.addressInfo?.cityKana || '',
-              streetAddress: data.addressInfo?.streetAddress || '',
-              streetAddressKana: data.addressInfo?.streetAddressKana || '',
-            },
-            adminUid: data.adminUid,
+            role: data.role,
+            classroomCode: data.classroomCode,
             createdAt: data.createdAt,
             lastLogin: data.lastLogin,
-            leaderLastName: data.leaderLastName,
-            leaderFirstName: data.leaderFirstName,
-            leaderLastKana: data.leaderLastKana,
-            leaderFirstKana: data.leaderFirstKana,
-            minimumWage: data.minimumWage,
-            tuitionName: data.tuitionName,
-            teacherFeeName: data.teacherFeeName,
-            periodTimeName: data.periodTimeName,
           } as Classroom;
         });
 

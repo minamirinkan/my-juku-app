@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { Superadmin } from '../types/superadmin';
+import { SuperAdmin } from '@/types/types';
 
 export function useSuperadmins() {
-    const [superadmins, setSuperadmins] = useState<Superadmin[]>([]);
+    const [superadmins, setSuperadmins] = useState<SuperAdmin[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<unknown>(null);
 
@@ -23,7 +23,7 @@ export function useSuperadmins() {
                         role: data.role,
                         createdAt: data.createdAt,
                         lastLogin: data.lastLogin,
-                    } as Superadmin;
+                    } as SuperAdmin;
                 });
                 setSuperadmins(list);
             } catch (e) {

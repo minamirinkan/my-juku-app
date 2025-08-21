@@ -1,8 +1,9 @@
+'use client'
 // hooks/useClassroom.ts
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Classroom } from "@/types/classroom";
+import { Classroom } from "@/types/types";
 
 export const useClassroom = (classroomCode?: string) => {
     const [classroom, setClassroom] = useState<Classroom | null>(null);

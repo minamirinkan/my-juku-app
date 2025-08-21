@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import StudentTableHeader from './StudentTableHeader';
 import StudentRow from './StudentRow';
 import PaginationControls from '@/utils/PaginationControls';
-import { Student } from '@/types/student';
+import { Student } from '@/types/types';
 
 type Props = {
     students: Student[];

@@ -1,25 +1,25 @@
 'use client';
 
 import { useState } from 'react';
-import { SuperAdminDataProvider } from '../SuperAdminDataProvider';
+import { AdminDataProvider } from '../AdminDataProvider';
 import Header from '@/app/components/header';
-import SuperAdminSidebar from '@/app/components/sidebar';
+import AdminSidebar from '@/app/components/adminSidebar';
 import { ReactNode } from "react";
 
-export default function SuperAdminLayout({ children }: { children: ReactNode }) {
+export default function AdminLayout({ children }: { children: ReactNode }) {
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     return (
-        <SuperAdminDataProvider>
+        <AdminDataProvider>
             <div className="flex flex-col min-h-screen">
                 <Header
                     onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-                    role="superadmin"
+                    role="admin"
                 />
                 <div className="flex flex-1 overflow-hidden">
                     {sidebarOpen && (
                         <div className="w-64 border-r border-gray-200">
-                            <SuperAdminSidebar onSelectMenu={(key) => console.log(key)} />
+                            <AdminSidebar onSelectMenu={(key) => console.log(key)} />
                         </div>
                     )}
                     <main className="flex-1 p-4 overflow-auto">
@@ -27,6 +27,6 @@ export default function SuperAdminLayout({ children }: { children: ReactNode }) 
                     </main>
                 </div>
             </div>
-        </SuperAdminDataProvider>
+        </AdminDataProvider>
     );
 }

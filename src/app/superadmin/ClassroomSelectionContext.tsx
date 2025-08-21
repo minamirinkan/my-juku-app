@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+"use client"; // クライアントコンポーネントとして明示
+
+import { createContext, useContext, useState } from "react";
 import type { ClassroomSelectionContextType } from "@/types/contextTypes";
 
 const ClassroomSelectionContext = createContext<ClassroomSelectionContextType | undefined>(undefined);

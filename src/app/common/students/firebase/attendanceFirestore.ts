@@ -1,5 +1,7 @@
+'use client'
 // src/utils/firebase/attendanceFirestore.ts
 import { doc, getDoc, setDoc, getFirestore, serverTimestamp, DocumentData } from 'firebase/firestore';
+import { PeriodLabel, DailySchedule } from '@/types/types';
 
 export const buildWeeklyDocId = (classroomCode: string, date: string | Date): string => {
     const d = new Date(date);
@@ -16,11 +18,6 @@ export const buildDailyDocId = (classroomCode: string, dateStr: string | Date): 
     const mm = String(d.getMonth() + 1).padStart(2, '0');
     const dd = String(d.getDate()).padStart(2, '0');
     return `${classroomCode}_${yyyy}-${mm}-${dd}_${weekday}`;
-};
-
-export type PeriodLabel = {
-    label: string;
-    // 他に必要なフィールドがあれば追加
 };
 
 export const getPeriodKey = (periodLabels: PeriodLabel[], label: string): string => {
@@ -44,7 +41,7 @@ export async function createScheduleFromWeeklyTemplate(
     collection: string,
     docId: string,
     weeklyRefId: string,
-    initialData: Record<string, any>
+    initialData: DailySchedule,
 ): Promise<DocumentData | null> {
     const db = getFirestore();
     const docRef = doc(db, collection, docId);
@@ -56,7 +53,7 @@ export async function createScheduleFromWeeklyTemplate(
     return await fetchScheduleDoc(collection, docId);
 }
 
-export async function saveScheduleDoc(collection: string, docId: string, data: Record<string, any>): Promise<void> {
+export async function saveScheduleDoc(collection: string, docId: string, data: DailySchedule): Promise<void> {
     const db = getFirestore();
     const docRef = doc(db, collection, docId);
     console.log("📝 保存前のデータ:", data);
@@ -86,7 +83,7 @@ export async function saveMakeupLesson(studentId: string, docId: string, lessonD
     const docRef = doc(db, 'students', studentId, 'makeupLessons', docId);
 
     const docSnap = await getDoc(docRef);
-    let existingLessons: any[] = [];
+    let existingLessons: LessonData[] = [];
 
     if (docSnap.exists()) {
         const data = docSnap.data();

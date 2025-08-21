@@ -3,12 +3,12 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
-interface SuperAdminHeaderProps {
+interface HeaderProps {
     onToggleSidebar: () => void;
     role: 'superadmin' | 'admin' | 'customer' | 'teacher';
 }
 
-const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({ onToggleSidebar, role }) => {
+const Header: React.FC<HeaderProps> = ({ onToggleSidebar, role }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -79,4 +79,4 @@ const SuperAdminHeader: React.FC<SuperAdminHeaderProps> = ({ onToggleSidebar, ro
     );
 };
 
-export default SuperAdminHeader;
+export default Header;

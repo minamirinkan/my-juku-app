@@ -1,10 +1,11 @@
 // utils/getUserDataByRole.ts
+"use client";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { UserData, UserRole } from "@/types/user";
+import { UserRole, UserData, UserDataSchema } from "@/types/types";
 
-// 検索順に注意（特に重複UIDがない前提）
+// コレクション順序（UID重複なし前提）
 const roleCollections: { role: Exclude<UserRole, null>; collection: string }[] = [
     { role: "superadmin", collection: "superadmins" },
     { role: "admin", collection: "admins" },
@@ -12,6 +13,9 @@ const roleCollections: { role: Exclude<UserRole, null>; collection: string }[] =
     { role: "customer", collection: "customers" },
 ];
 
+/**
+ * UIDからユーザーデータを取得してZodでバリデーション
+ */
 export const getUserDataByRole = async (
     uid: string
 ): Promise<{ role: UserRole; userData: UserData }> => {
@@ -20,14 +24,15 @@ export const getUserDataByRole = async (
         const snap = await getDoc(ref);
 
         if (snap.exists()) {
-            return {
-                role,
-                userData: {
-                    uid,
-                    ...snap.data(),
-                    role,
-                } as UserData,
-            };
+            const rawData = { uid, role, ...snap.data() };
+            const parsed = UserDataSchema.safeParse(rawData);
+
+            if (!parsed.success) {
+                console.error("UserDataSchema validation failed", parsed.error);
+                throw new Error("ユーザーデータが不正です。");
+            }
+
+            return { role, userData: parsed.data };
         }
     }
 

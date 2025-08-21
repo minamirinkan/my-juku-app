@@ -1,11 +1,13 @@
-'use client';
+// context/AuthContext.tsx
+"use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { getUserDataByRole } from "@/utils/getUserDataByRole";
-import { UserRole, UserData } from "@/types/user";
-import { AuthContextType } from "@/types/auth";
+import {
+    UserRole, UserData, AuthContextType
+} from '@/types/types'
 
 const AuthContext = createContext<AuthContextType>({
     user: null,
@@ -15,7 +17,7 @@ const AuthContext = createContext<AuthContextType>({
     loading: true,
 });
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<FirebaseUser | null>(null);
     const [role, setRole] = useState<UserRole | null>(null);
     const [userData, setUserData] = useState<UserData | null>(null);
@@ -24,7 +26,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
-            setLoading(true);
 
             if (!currentUser) {
                 setRole(null);
@@ -41,11 +42,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 console.error("Error fetching user data:", error);
                 setRole(null);
                 setUserData(null);
+            } finally {
+                setLoading(false);
             }
-
-            setLoading(false);
         });
-
         return () => unsubscribe();
     }, []);
 
@@ -62,8 +62,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             {children}
         </AuthContext.Provider>
     );
-}
+};
 
-export function useAuth() {
-    return useContext(AuthContext);
-}
+export const useAuth = () => useContext(AuthContext);

@@ -2,11 +2,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { SchoolClosuresDocument, SchoolClosure } from '../types/schoolClosures';
+import { SchoolClosures, Closure } from '@/types/types';
 
 export const useSchoolClosures = (year: string, classroomCode?: string) => {
-    const [closures, setClosures] = useState<SchoolClosure[]>([]);
-    const [deletedClosures, setDeletedClosures] = useState<SchoolClosure[]>([]);
+    const [closures, setClosures] = useState<Closure[]>([]);
+    const [deletedClosures, setDeletedClosures] = useState<Closure[]>([]);
     const [updatedAt, setUpdatedAt] = useState<Timestamp | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>(null);
@@ -25,7 +25,7 @@ export const useSchoolClosures = (year: string, classroomCode?: string) => {
                 const snapshot = await getDoc(ref);
 
                 if (snapshot.exists()) {
-                    const data = snapshot.data() as SchoolClosuresDocument;
+                    const data = snapshot.data() as SchoolClosures;
                     setClosures(data.closures || []);
                     setDeletedClosures(data.deletedClosures || []);
                     if (data.updatedAt instanceof Timestamp) {
@@ -47,7 +47,7 @@ export const useSchoolClosures = (year: string, classroomCode?: string) => {
         fetchClosures();
     }, [getDocRef]);
 
-    const saveClosures = async (newClosures: SchoolClosure[], newDeletedClosures: SchoolClosure[]) => {
+    const saveClosures = async (newClosures: Closure[], newDeletedClosures: Closure[]) => {
         const ref = getDocRef();
         await setDoc(ref, {
             closures: newClosures,
@@ -58,7 +58,7 @@ export const useSchoolClosures = (year: string, classroomCode?: string) => {
         setDeletedClosures(newDeletedClosures);
     };
 
-    const addClosure = async (closure: SchoolClosure) => {
+    const addClosure = async (closure: Closure) => {
         const updated = [...closures, closure];
         await updateDoc(getDocRef(), {
             closures: updated,

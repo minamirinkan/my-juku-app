@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { formatDate } from '@/utils/dateFormatter';
-import { Student } from '@/types/student';
+import { Student } from '@/types/types';
 
 type Props = {
     student: Student;

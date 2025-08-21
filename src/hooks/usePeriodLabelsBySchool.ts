@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { PeriodLabel } from "../types/periodLabel";
+import { PeriodLabel } from "@/types/types";
 
 export const usePeriodLabelsByClassroomCode = (classroomCode?: string) => {
   const [labels, setLabels] = useState<PeriodLabel[]>([]);
